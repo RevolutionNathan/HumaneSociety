@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Add.cs" />
     <Compile Include="Adoption.cs" />
+    <Compile Include="Animal.cs" />
     <Compile Include="CSV.cs" />
     <Compile Include="DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
@@ -63,9 +64,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Register.cs" />
+    <Compile Include="Room.cs" />
     <Compile Include="Search.cs" />
     <Compile Include="SQL.cs" />
-    <Compile Include="UserInterface.cs" />
+    <Compile Include="System\Configuration\ConfigurationManager.cs" />
+    <Compile Include="UI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

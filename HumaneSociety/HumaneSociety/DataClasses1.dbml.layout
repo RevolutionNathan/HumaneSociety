@@ -2,11 +2,24 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClasses1">
   <DataContextMoniker Name="/DataClasses1DataContext" />
   <nestedChildShapes>
-    <classShape Id="a6850601-54c5-4a12-a6b1-aa2d2a7d4762" absoluteBounds="5.875, 2.125, 2, 2.3478011067708335">
-      <DataClassMoniker Name="/DataClasses1DataContext/AnimalsMasterList" />
+    <classShape Id="d847b720-1a89-4fdc-8a61-d7367ab4ed1e" absoluteBounds="3.25, 2.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DataClasses1DataContext/RoomNumber" />
       <nestedChildShapes>
-        <elementListCompartment Id="2599aba5-646b-4191-b36f-5db5054553e3" absoluteBounds="5.89, 2.585, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e8c30ff5-c094-4829-989c-173278550fbb" absoluteBounds="3.265, 2.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="6f7abd95-a170-4774-a55d-d6305ae86918" absoluteBounds="6, 2.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/DataClasses1DataContext/AnimalsMasterList" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1e66c851-922a-44e3-aae2-057abd0f9294" absoluteBounds="6.015, 3.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6 : 3.22679768880208); (5.25 : 3.22679768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClasses1DataContext/AnimalsMasterList/AnimalsMasterList_RoomNumber" />
+      <nodes>
+        <classShapeMoniker Id="6f7abd95-a170-4774-a55d-d6305ae86918" />
+        <classShapeMoniker Id="d847b720-1a89-4fdc-8a61-d7367ab4ed1e" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

@@ -8,20 +8,23 @@ namespace HumaneSociety
 {
     class MainMenu
     {
+
+        Add add = new Add();
+        Delete delete = new Delete();
+        Register register = new HumaneSociety.Register();
+        Health health = new HumaneSociety.Health();
+        Search search = new Search();
+        Adoption adoption = new Adoption();
+        Room room = new Room();
         public void Menu()
         {
-            Add add = new Add();
-            Delete delete = new Delete();
-            Register register = new HumaneSociety.Register();
-            UserInterface.MainMenuChoice();
-            Health health = new HumaneSociety.Health();
-            Search search = new Search();
-            Adoption adoption = new Adoption();
+            Console.Clear();
+            UI.MainMenuChoice();
             string menuChoice = Console.ReadLine();
             switch (menuChoice)
             {
                 case "1":
-                    add.AddAnimal();
+                    add.AddMenu();
                     break;
                 case "2":
                     delete.DeleteAnimal();
@@ -30,12 +33,15 @@ namespace HumaneSociety
                     register.RunRegister();
                     break;
                 case "4":
-                    health.HealthRecords();
+                    room.RoomMenu();
                     break;
                 case "5":
-                    search.SearchAnimal();
+                    health.HealthRecords();
                     break;
                 case "6":
+                    search.SearchAnimal();
+                    break;
+                case "7":
                     adoption.AdoptionApplication();
                     break;
                 default:
@@ -43,5 +49,8 @@ namespace HumaneSociety
                     break;
             }
          }
+
+      
+
     }
 }

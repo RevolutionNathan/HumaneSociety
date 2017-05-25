@@ -30,6 +30,9 @@ namespace HumaneSociety
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertRoomNumber(RoomNumber instance);
+    partial void UpdateRoomNumber(RoomNumber instance);
+    partial void DeleteRoomNumber(RoomNumber instance);
     partial void InsertAnimalsMasterList(AnimalsMasterList instance);
     partial void UpdateAnimalsMasterList(AnimalsMasterList instance);
     partial void DeleteAnimalsMasterList(AnimalsMasterList instance);
@@ -65,11 +68,194 @@ namespace HumaneSociety
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<RoomNumber> RoomNumbers
+		{
+			get
+			{
+				return this.GetTable<RoomNumber>();
+			}
+		}
+		
 		public System.Data.Linq.Table<AnimalsMasterList> AnimalsMasterLists
 		{
 			get
 			{
 				return this.GetTable<AnimalsMasterList>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RoomNumber")]
+	public partial class RoomNumber : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RoomKey;
+		
+		private int _Room;
+		
+		private bool _Occupied;
+		
+		private int _AnimalID;
+		
+		private EntityRef<AnimalsMasterList> _AnimalsMasterList;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoomKeyChanging(int value);
+    partial void OnRoomKeyChanged();
+    partial void OnRoomChanging(int value);
+    partial void OnRoomChanged();
+    partial void OnOccupiedChanging(bool value);
+    partial void OnOccupiedChanged();
+    partial void OnAnimalIDChanging(int value);
+    partial void OnAnimalIDChanged();
+    #endregion
+		
+		public RoomNumber()
+		{
+			this._AnimalsMasterList = default(EntityRef<AnimalsMasterList>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomKey", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RoomKey
+		{
+			get
+			{
+				return this._RoomKey;
+			}
+			set
+			{
+				if ((this._RoomKey != value))
+				{
+					this.OnRoomKeyChanging(value);
+					this.SendPropertyChanging();
+					this._RoomKey = value;
+					this.SendPropertyChanged("RoomKey");
+					this.OnRoomKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Room", DbType="Int NOT NULL")]
+		public int Room
+		{
+			get
+			{
+				return this._Room;
+			}
+			set
+			{
+				if ((this._Room != value))
+				{
+					this.OnRoomChanging(value);
+					this.SendPropertyChanging();
+					this._Room = value;
+					this.SendPropertyChanged("Room");
+					this.OnRoomChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Occupied", DbType="Bit NOT NULL")]
+		public bool Occupied
+		{
+			get
+			{
+				return this._Occupied;
+			}
+			set
+			{
+				if ((this._Occupied != value))
+				{
+					this.OnOccupiedChanging(value);
+					this.SendPropertyChanging();
+					this._Occupied = value;
+					this.SendPropertyChanged("Occupied");
+					this.OnOccupiedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnimalID", DbType="Int NOT NULL")]
+		public int AnimalID
+		{
+			get
+			{
+				return this._AnimalID;
+			}
+			set
+			{
+				if ((this._AnimalID != value))
+				{
+					if (this._AnimalsMasterList.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAnimalIDChanging(value);
+					this.SendPropertyChanging();
+					this._AnimalID = value;
+					this.SendPropertyChanged("AnimalID");
+					this.OnAnimalIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AnimalsMasterList_RoomNumber", Storage="_AnimalsMasterList", ThisKey="AnimalID", OtherKey="AnimalID", IsForeignKey=true)]
+		public AnimalsMasterList AnimalsMasterList
+		{
+			get
+			{
+				return this._AnimalsMasterList.Entity;
+			}
+			set
+			{
+				AnimalsMasterList previousValue = this._AnimalsMasterList.Entity;
+				if (((previousValue != value) 
+							|| (this._AnimalsMasterList.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AnimalsMasterList.Entity = null;
+						previousValue.RoomNumbers.Remove(this);
+					}
+					this._AnimalsMasterList.Entity = value;
+					if ((value != null))
+					{
+						value.RoomNumbers.Add(this);
+						this._AnimalID = value.AnimalID;
+					}
+					else
+					{
+						this._AnimalID = default(int);
+					}
+					this.SendPropertyChanged("AnimalsMasterList");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -86,8 +272,6 @@ namespace HumaneSociety
 		
 		private string _AnimalType;
 		
-		private int _RoomNumber;
-		
 		private int _Price;
 		
 		private System.DateTime _EntryDate;
@@ -95,6 +279,8 @@ namespace HumaneSociety
 		private System.DateTime _AdoptedDate;
 		
 		private bool _Adopted;
+		
+		private EntitySet<RoomNumber> _RoomNumbers;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -106,8 +292,6 @@ namespace HumaneSociety
     partial void OnNameChanged();
     partial void OnAnimalTypeChanging(string value);
     partial void OnAnimalTypeChanged();
-    partial void OnRoomNumberChanging(int value);
-    partial void OnRoomNumberChanged();
     partial void OnPriceChanging(int value);
     partial void OnPriceChanged();
     partial void OnEntryDateChanging(System.DateTime value);
@@ -120,6 +304,7 @@ namespace HumaneSociety
 		
 		public AnimalsMasterList()
 		{
+			this._RoomNumbers = new EntitySet<RoomNumber>(new Action<RoomNumber>(this.attach_RoomNumbers), new Action<RoomNumber>(this.detach_RoomNumbers));
 			OnCreated();
 		}
 		
@@ -179,26 +364,6 @@ namespace HumaneSociety
 					this._AnimalType = value;
 					this.SendPropertyChanged("AnimalType");
 					this.OnAnimalTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomNumber", DbType="Int NOT NULL")]
-		public int RoomNumber
-		{
-			get
-			{
-				return this._RoomNumber;
-			}
-			set
-			{
-				if ((this._RoomNumber != value))
-				{
-					this.OnRoomNumberChanging(value);
-					this.SendPropertyChanging();
-					this._RoomNumber = value;
-					this.SendPropertyChanged("RoomNumber");
-					this.OnRoomNumberChanged();
 				}
 			}
 		}
@@ -283,6 +448,19 @@ namespace HumaneSociety
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AnimalsMasterList_RoomNumber", Storage="_RoomNumbers", ThisKey="AnimalID", OtherKey="AnimalID")]
+		public EntitySet<RoomNumber> RoomNumbers
+		{
+			get
+			{
+				return this._RoomNumbers;
+			}
+			set
+			{
+				this._RoomNumbers.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -301,6 +479,18 @@ namespace HumaneSociety
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_RoomNumbers(RoomNumber entity)
+		{
+			this.SendPropertyChanging();
+			entity.AnimalsMasterList = this;
+		}
+		
+		private void detach_RoomNumbers(RoomNumber entity)
+		{
+			this.SendPropertyChanging();
+			entity.AnimalsMasterList = null;
 		}
 	}
 }
