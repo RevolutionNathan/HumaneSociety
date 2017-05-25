@@ -23,59 +23,59 @@ namespace HumaneSociety
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HumaneSociety")]
-	public partial class AnimalsTablesDataContext : System.Data.Linq.DataContext
+	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertMasterListAnimal(MasterListAnimal instance);
-    partial void UpdateMasterListAnimal(MasterListAnimal instance);
-    partial void DeleteMasterListAnimal(MasterListAnimal instance);
+    partial void InsertAnimalsMasterList(AnimalsMasterList instance);
+    partial void UpdateAnimalsMasterList(AnimalsMasterList instance);
+    partial void DeleteAnimalsMasterList(AnimalsMasterList instance);
     #endregion
 		
-		public AnimalsTablesDataContext() : 
+		public DataClasses1DataContext() : 
 				base(global::HumaneSociety.Properties.Settings.Default.HumaneSocietyConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public AnimalsTablesDataContext(string connection) : 
+		public DataClasses1DataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public AnimalsTablesDataContext(System.Data.IDbConnection connection) : 
+		public DataClasses1DataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public AnimalsTablesDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DataClasses1DataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public AnimalsTablesDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DataClasses1DataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<MasterListAnimal> MasterListAnimals
+		public System.Data.Linq.Table<AnimalsMasterList> AnimalsMasterLists
 		{
 			get
 			{
-				return this.GetTable<MasterListAnimal>();
+				return this.GetTable<AnimalsMasterList>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MasterListAnimals")]
-	public partial class MasterListAnimal : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AnimalsMasterList")]
+	public partial class AnimalsMasterList : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -84,9 +84,17 @@ namespace HumaneSociety
 		
 		private string _Name;
 		
+		private string _AnimalType;
+		
 		private int _RoomNumber;
 		
 		private int _Price;
+		
+		private System.DateTime _EntryDate;
+		
+		private System.DateTime _AdoptedDate;
+		
+		private bool _Adopted;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -96,13 +104,21 @@ namespace HumaneSociety
     partial void OnAnimalIDChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
+    partial void OnAnimalTypeChanging(string value);
+    partial void OnAnimalTypeChanged();
     partial void OnRoomNumberChanging(int value);
     partial void OnRoomNumberChanged();
     partial void OnPriceChanging(int value);
     partial void OnPriceChanged();
+    partial void OnEntryDateChanging(System.DateTime value);
+    partial void OnEntryDateChanged();
+    partial void OnAdoptedDateChanging(System.DateTime value);
+    partial void OnAdoptedDateChanged();
+    partial void OnAdoptedChanging(bool value);
+    partial void OnAdoptedChanged();
     #endregion
 		
-		public MasterListAnimal()
+		public AnimalsMasterList()
 		{
 			OnCreated();
 		}
@@ -147,6 +163,26 @@ namespace HumaneSociety
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnimalType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string AnimalType
+		{
+			get
+			{
+				return this._AnimalType;
+			}
+			set
+			{
+				if ((this._AnimalType != value))
+				{
+					this.OnAnimalTypeChanging(value);
+					this.SendPropertyChanging();
+					this._AnimalType = value;
+					this.SendPropertyChanged("AnimalType");
+					this.OnAnimalTypeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomNumber", DbType="Int NOT NULL")]
 		public int RoomNumber
 		{
@@ -183,6 +219,66 @@ namespace HumaneSociety
 					this._Price = value;
 					this.SendPropertyChanged("Price");
 					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntryDate", DbType="Date NOT NULL")]
+		public System.DateTime EntryDate
+		{
+			get
+			{
+				return this._EntryDate;
+			}
+			set
+			{
+				if ((this._EntryDate != value))
+				{
+					this.OnEntryDateChanging(value);
+					this.SendPropertyChanging();
+					this._EntryDate = value;
+					this.SendPropertyChanged("EntryDate");
+					this.OnEntryDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdoptedDate", DbType="Date NOT NULL")]
+		public System.DateTime AdoptedDate
+		{
+			get
+			{
+				return this._AdoptedDate;
+			}
+			set
+			{
+				if ((this._AdoptedDate != value))
+				{
+					this.OnAdoptedDateChanging(value);
+					this.SendPropertyChanging();
+					this._AdoptedDate = value;
+					this.SendPropertyChanged("AdoptedDate");
+					this.OnAdoptedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopted", DbType="Bit NOT NULL")]
+		public bool Adopted
+		{
+			get
+			{
+				return this._Adopted;
+			}
+			set
+			{
+				if ((this._Adopted != value))
+				{
+					this.OnAdoptedChanging(value);
+					this.SendPropertyChanging();
+					this._Adopted = value;
+					this.SendPropertyChanged("Adopted");
+					this.OnAdoptedChanged();
 				}
 			}
 		}

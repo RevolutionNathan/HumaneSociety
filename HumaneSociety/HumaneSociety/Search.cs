@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    class Program
+    class Search
     {
-        static void Main(string[] args)
+        public void SearchAnimal()
         {
-            MainMenu menu = new MainMenu();
-            menu.Menu();
-            Console.ReadKey();
+
         }
     }
 }

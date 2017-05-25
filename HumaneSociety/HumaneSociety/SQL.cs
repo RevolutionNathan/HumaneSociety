@@ -12,19 +12,19 @@ namespace HumaneSociety
 
         public string searchName;
 
-        public void InsertIntoDatabase()
-        {
-            using (SqlConnection connect = new SqlConnection())
-            {
-                connect.ConnectionString = "Server=localhost;Database=HumaneSociety;Trusted_Connection=True";
-                connect.Open();
-                string query = "INSERT INTO AnimalsMasterList (Name, RoomNumber, AnimalType) VALUES (@Name, @RoomNumber, @AnimalType)";
-                SqlCommand insertCommand = new SqlCommand(query, connect);
-                insertCommand.Parameters.AddWithValue("@Name", /*humanPlayer.name*/);
+        //public void InsertIntoDatabase()
+        //{
+        //    using (SqlConnection connect = new SqlConnection())
+        //    {
+        //        connect.ConnectionString = "Server=localhost;Database=HumaneSociety;Trusted_Connection=True";
+        //        connect.Open();
+        //        string query = "INSERT INTO AnimalsMasterList (Name, RoomNumber, AnimalType) VALUES (@Name, @RoomNumber, @AnimalType)";
+        //        SqlCommand insertCommand = new SqlCommand(query, connect);
+        //        insertCommand.Parameters.AddWithValue("@Name", humanPlayer.name);
                 
-                insertCommand.ExecuteNonQuery();
-            }
-        }
+        //        insertCommand.ExecuteNonQuery();
+        //    }
+        //}
 
     }
 }

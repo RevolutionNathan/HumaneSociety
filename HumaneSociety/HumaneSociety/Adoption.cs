@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    class Program
+    class Adoption
     {
-        static void Main(string[] args)
+        public void AdoptionApplication()
         {
-            MainMenu menu = new MainMenu();
-            menu.Menu();
-            Console.ReadKey();
+
         }
     }
 }
