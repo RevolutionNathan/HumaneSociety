@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClasses1">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.125, 8.5" name="DataClasses1">
   <DataContextMoniker Name="/DataClasses1DataContext" />
   <nestedChildShapes>
     <classShape Id="d847b720-1a89-4fdc-8a61-d7367ab4ed1e" absoluteBounds="3.25, 2.125, 2, 1.5785953776041666">
@@ -19,6 +19,45 @@
       <nodes>
         <classShapeMoniker Id="6f7abd95-a170-4774-a55d-d6305ae86918" />
         <classShapeMoniker Id="d847b720-1a89-4fdc-8a61-d7367ab4ed1e" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="21421802-a258-4ac7-9ed2-00cd5b21d628" absoluteBounds="3.375, 4.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DataClasses1DataContext/Shot" />
+      <nestedChildShapes>
+        <elementListCompartment Id="86000385-2040-400b-a58f-1ae05d81ab38" absoluteBounds="3.39, 4.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6 : 4.51524983723958); (5.375 : 4.51524983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClasses1DataContext/AnimalsMasterList/AnimalsMasterList_Shot" />
+      <nodes>
+        <classShapeMoniker Id="6f7abd95-a170-4774-a55d-d6305ae86918" />
+        <classShapeMoniker Id="21421802-a258-4ac7-9ed2-00cd5b21d628" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ec273a54-830b-4a49-b01e-0c6e0fa31804" absoluteBounds="8.875, 1.875, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DataClasses1DataContext/Trait" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cfe58058-2490-4766-a127-aa439be3f1dd" absoluteBounds="8.89, 2.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8 : 3.29409912109375); (8.875 : 3.29409912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClasses1DataContext/AnimalsMasterList/AnimalsMasterList_Trait" />
+      <nodes>
+        <classShapeMoniker Id="6f7abd95-a170-4774-a55d-d6305ae86918" />
+        <classShapeMoniker Id="ec273a54-830b-4a49-b01e-0c6e0fa31804" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b6b28b14-a92e-49ea-9b35-8099984b8531" absoluteBounds="8.75, 4.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DataClasses1DataContext/Food" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ca61516-a4c2-4eea-91a5-55a2e716dceb" absoluteBounds="8.765, 4.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8 : 4.64024983723958); (8.75 : 4.64024983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClasses1DataContext/AnimalsMasterList/AnimalsMasterList_Food" />
+      <nodes>
+        <classShapeMoniker Id="6f7abd95-a170-4774-a55d-d6305ae86918" />
+        <classShapeMoniker Id="b6b28b14-a92e-49ea-9b35-8099984b8531" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

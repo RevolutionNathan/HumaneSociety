@@ -19,6 +19,37 @@
       <Column Name="AdoptedDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Adopted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="AnimalsMasterList_RoomNumber" Member="RoomNumbers" ThisKey="AnimalID" OtherKey="AnimalID" Type="RoomNumber" />
+      <Association Name="AnimalsMasterList_Shot" Member="Shots" ThisKey="AnimalID" OtherKey="AnimalID" Type="Shot" />
+      <Association Name="AnimalsMasterList_Trait" Member="Traits" ThisKey="AnimalID" OtherKey="AnimalID" Type="Trait" />
+      <Association Name="AnimalsMasterList_Food" Member="Foods" ThisKey="AnimalID" OtherKey="AnimalID" Type="Food" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Shots" Member="Shots">
+    <Type Name="Shot">
+      <Column Name="ShotsID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Shots" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="AnimalsMasterList_Shot" Member="AnimalsMasterList" ThisKey="AnimalID" OtherKey="AnimalID" Type="AnimalsMasterList" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Traits" Member="Traits">
+    <Type Name="Trait">
+      <Column Name="TraitsID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Energetic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Cuddly" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SpayedNuetered" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Young" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="AnimalsMasterList_Trait" Member="AnimalsMasterList" ThisKey="AnimalID" OtherKey="AnimalID" Type="AnimalsMasterList" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Food" Member="Foods">
+    <Type Name="Food">
+      <Column Name="FoodID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Kind" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="AnimalsMasterList_Food" Member="AnimalsMasterList" ThisKey="AnimalID" OtherKey="AnimalID" Type="AnimalsMasterList" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

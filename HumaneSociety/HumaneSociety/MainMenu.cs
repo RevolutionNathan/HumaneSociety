@@ -16,38 +16,46 @@ namespace HumaneSociety
         Search search = new Search();
         Adoption adoption = new Adoption();
         Room room = new Room();
+        private bool runMenu = false;
         public void Menu()
         {
-            Console.Clear();
-            UI.MainMenuChoice();
-            string menuChoice = Console.ReadLine();
-            switch (menuChoice)
+            while (runMenu == false)
             {
-                case "1":
-                    add.AddMenu();
-                    break;
-                case "2":
-                    delete.DeleteAnimal();
-                    break;
-                case "3":
-                    register.RunRegister();
-                    break;
-                case "4":
-                    room.RoomMenu();
-                    break;
-                case "5":
-                    health.HealthRecords();
-                    break;
-                case "6":
-                    search.SearchAnimal();
-                    break;
-                case "7":
-                    adoption.AdoptionApplication();
-                    break;
-                default:
-                    Menu();
-                    break;
+                Console.Clear();
+                UI.MainMenuChoice();
+                string menuChoice = Console.ReadLine();
+                switch (menuChoice)
+                {
+                    case "1":
+                        add.AddMenu();
+                        break;
+                    case "2":
+                        delete.DeleteAnimal();
+                        break;
+                    case "3":
+                        register.RunRegister();
+                        break;
+                    case "4":
+                        add.CheckOpenRoom();
+                        break;
+                    case "5":
+                        health.HealthRecords();
+                        break;
+                    case "6":
+                        search.SearchAnimal();
+                        break;
+                    case "7":
+                        adoption.AdoptionApplication();
+                        break;
+                    case "8":
+                        runMenu = true;
+                        break;
+                    default:
+                        Menu();
+                        break;
+                }
             }
+            
          }
 
       

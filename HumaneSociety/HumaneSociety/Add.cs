@@ -46,9 +46,40 @@ namespace HumaneSociety
 
             AnimalsMasterList Animal = db.AnimalsMasterLists.FirstOrDefault(e => e.Name.Equals(newAnimalInfo.name));
 
-            Console.WriteLine("Animal Id = {0} , Name = {1}", Animal.AnimalID, Animal.Name);
+            Console.WriteLine("Let's update the food and healthrecords for Animal Id = {0} , Name = {1}", Animal.AnimalID, Animal.Name);
+            AddFood();
+            AddHealth();
+            AddAnimalToRoom();
+            
             Console.WriteLine("\nPress any key to return to Main Menu.");
             Console.ReadKey(); 
+        }
+        public void AddHealth()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            Shot addShot = new Shot();
+            AnimalsMasterList Animal = db.AnimalsMasterLists.FirstOrDefault(e => e.Name.Equals(newAnimalInfo.name));
+            addShot.AnimalID = Animal.AnimalID;
+            UI.AskShotsStatus();
+            addShot.Shots = Convert.ToBoolean(Console.ReadLine());
+
+            db.Shots.InsertOnSubmit(addShot);
+            db.SubmitChanges();
+        }
+        public void AddFood()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            Food addFood = new Food();
+            AnimalsMasterList Animal = db.AnimalsMasterLists.FirstOrDefault(e => e.Name.Equals(newAnimalInfo.name));
+            addFood.AnimalID = Animal.AnimalID;
+            UI.AskAnimalFoodAmount();
+            addFood.Amount = Int32.Parse(Console.ReadLine());
+            UI.AskAnimalFoodKind();
+            addFood.Kind = Console.ReadLine();
+
+            db.Foods.InsertOnSubmit(addFood);
+            db.SubmitChanges();
+
         }
         public void RoomMenu()
         {
@@ -93,6 +124,7 @@ namespace HumaneSociety
 
         public void AddAnimalToRoom()
         {
+            CheckOpenRoom();
             if (CheckOpenRoom() == false)
             {
                 UI.AskAnimalID();

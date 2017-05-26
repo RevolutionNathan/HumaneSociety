@@ -14,7 +14,11 @@ namespace HumaneSociety
         public int room;
         public int animalID;
         public int wantedRoomNumber = 0;
-        
+
+        public void RoomMenu()
+        {
+
+        }
 
        
     }

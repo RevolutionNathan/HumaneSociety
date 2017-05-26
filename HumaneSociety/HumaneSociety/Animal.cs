@@ -8,6 +8,7 @@ namespace HumaneSociety
 {
     class Animal
     {
+        public int searchID;
         public string name = "new animal";
         public int price = 0;
         public string type = "new animal";
