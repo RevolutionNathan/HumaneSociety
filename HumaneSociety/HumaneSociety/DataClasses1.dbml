@@ -52,4 +52,13 @@
       <Association Name="AnimalsMasterList_Food" Member="AnimalsMasterList" ThisKey="AnimalID" OtherKey="AnimalID" Type="AnimalsMasterList" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.AdopterProfiles" Member="AdopterProfiles">
+    <Type Name="AdopterProfile">
+      <Column Name="AdopterID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNUmber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="typeAnimalWanted" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

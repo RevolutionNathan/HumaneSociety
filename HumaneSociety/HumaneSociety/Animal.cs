@@ -32,10 +32,10 @@ namespace HumaneSociety
             type = Console.ReadLine();
             UI.AskAnimalPrice();
             price = Int32.Parse(Console.ReadLine());
-            UI.AskAnimalFoodAmount();
-            food = Console.ReadLine();
-            UI.AskShotsStatus();
-            shots = bool.Parse(Console.ReadLine());
+            //UI.AskAnimalFoodAmount();
+            //food = Console.ReadLine();
+            //UI.AskShotsStatus();
+            //shots = bool.Parse(Console.ReadLine());
             UI.AskGender();
             gender = Console.ReadLine();
             //UI.AskColor();

@@ -9,6 +9,7 @@ namespace HumaneSociety
     class Search
     {
         Animal searchAnimal = new Animal();
+        Room room = new Room();
         public void getAnimalIDByName()
         {
             UI.AskAnimalName();
@@ -16,38 +17,83 @@ namespace HumaneSociety
 
             DataClasses1DataContext db = new DataClasses1DataContext();
 
-            var IDs = db.GetTable<AnimalsMasterList>();
-            var IDsList = from i in IDs
-                          where i.Name == searchAnimal.name
-                          select i.AnimalID;
-            UI.ListIDsFromNameSearch();
-            Console.Write(IDsList);
+            var IDs = db.GetTable<AnimalsMasterList>().Where(i => i.Name == searchAnimal.name);
+            foreach(var i in IDs)
+            {
+                Console.Write(i.AnimalID);
+            }
+           
             UI.EnterIDYouWant();
             searchAnimal.searchID = Int32.Parse(Console.ReadLine());
         }
-        public void SearchRoomByID()
+        public bool CheckOpenRoom()
         {
-            // 
+            UI.AskRoomNumber();
+            int wantedRoomNumber = Int32.Parse(Console.ReadLine());
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            var rooms = db.GetTable<RoomNumber>();
+            var isFull = from o in rooms
+                         where o.Room == wantedRoomNumber
+                         select o.Occupied;
+            if (isFull.FirstOrDefault() == false || isFull.FirstOrDefault() == null)
+            {
+                UI.RoomOPen();
+                room.room = wantedRoomNumber;
+                room.occupied = true;
+                Console.ReadKey();
+                return false;
+            }
+            else
+            {
+                UI.RoomOccupied();
+                CheckOpenRoom();
+                return true;
+            }
+        }
+
+        public void GetAnimalNameByID()
+        {
+            UI.AskAnimalID();
+            searchAnimal.searchID = Int32.Parse(Console.ReadLine());
+
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            var searchAnimals = db.GetTable<AnimalsMasterList>();
+            var findName = from n in searchAnimals
+                           where n.AnimalID == searchAnimal.searchID
+                           select n.Name;
+
+            Console.Write("\nThe name of the aninal with ID: " + searchAnimal.searchID + "is: " + findName);
         }
         public void SearchAnimal()
         {
-            UI.SearchAnimalMenu(); Console.WriteLine("1: search food quantity 2: search animal by type 3: search animal by traits");
+            bool runSearch = true;
+            UI.SearchAnimalMenu(); 
             string searchChoice = Console.ReadLine();
-            switch(searchChoice)
+            while (runSearch = true)
             {
-                case "1":
-                    FoodSearchMenu();
-                    break;
-                case "2":
-                    KindSearch();
-                    break;
-                case "3":
-                    TraitsSearch();
-                    break;
-                default:
-                    SearchAnimal();
-                    break;
+                switch (searchChoice)
+                {
+                    case "1":
+                        FoodSearchMenu();
+                        break;
+                    case "2":
+                        KindSearch();
+                        break;
+                    case "3":
+                        TraitsSearch();
+                        break;
+                    case "4":
+                        GetAnimalNameByID();
+                        break;
+                    case "5":
+                        runSearch = false;
+                        break;
+                    default:
+                        SearchAnimal();
+                        break;
+                }
             }
+          
         }
 
         public void TraitsSearch()
@@ -63,11 +109,12 @@ namespace HumaneSociety
 
             DataClasses1DataContext db = new DataClasses1DataContext();
 
-            var Traits = db.GetTable<Trait>();
-            var TraitList = from i in Traits
-                           where i.Energetic == energetic && i.Cuddly == cuddly && i.SpayedNuetered == SpayNuet && i.Young == young
-                           select i.AnimalID;
-            Console.Write(TraitList);
+            var Traits = db.GetTable<Trait>().Where(i => i.Energetic == energetic && i.Cuddly == cuddly && i.SpayedNuetered == SpayNuet && i.Young == young);
+            foreach( var i in Traits)
+            {
+                Console.Write("\n ID of Animal that matches your search: " + i.AnimalID);
+            }
+            
             Console.ReadKey();
 
         }
@@ -81,14 +128,9 @@ namespace HumaneSociety
             var x = db.GetTable<AnimalsMasterList>().Where(y => y.AnimalType == kindSought);
             foreach(var y in x)
             {
-                Console.WriteLine("AnimalID    Name     \n" + y.AnimalID + " " + );
+                Console.WriteLine("\n AnimalID:" + y.AnimalID + "\n Animal Name:" + y.Name + "Type of Animal:" + y.AnimalType);
             }
-            //var KindList = from i in db.GetTable<AnimalsMasterList>()
-            //               where i.AnimalType == kindSought
-            //               select i;
-            //Console.Write(x);
             Console.ReadKey();
-
         }
         
         public void FoodSearch()
@@ -98,11 +140,12 @@ namespace HumaneSociety
 
             DataClasses1DataContext db = new DataClasses1DataContext();
 
-            var Food = db.GetTable<Food>();
-            var FoodList = from i in Food
-                          where i.AnimalID == searchAnimal.searchID
-                          select i.Amount;
-            Console.Write(FoodList);
+            var Food = db.GetTable<Food>().Where(y => y.AnimalID == searchAnimal.searchID);
+            foreach (var y in Food)
+            {
+                Console.Write(y.Amount);
+            } 
+            
             Console.ReadKey();
         }
 

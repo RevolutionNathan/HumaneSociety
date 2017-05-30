@@ -30,28 +30,48 @@ namespace HumaneSociety
      
         public void GiveShot()
         {
-            int IdOfAnimalToBeInnoculated = Int32.Parse(Console.ReadLine());
-            healthAnimal.searchID = IdOfAnimalToBeInnoculated;
-            DataClasses1DataContext db = new DataClasses1DataContext();
-            Shot animalShot = db.Shots.FirstOrDefault(e => e.AnimalID.Equals(healthAnimal.searchID));
+            UI.AskAnimalID();
+            try
+            {
+                int IdOfAnimalToBeInnoculated = Int32.Parse(Console.ReadLine());
 
-            animalShot.Shots = true;
+                healthAnimal.searchID = IdOfAnimalToBeInnoculated;
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                Shot animalShot = db.Shots.FirstOrDefault(e => e.AnimalID.Equals(healthAnimal.searchID));
 
-            db.SubmitChanges();
+                animalShot.Shots = true;
+
+                db.SubmitChanges();
+            }
+            catch
+            {
+                UI.NeedValidID();
+                GiveShot();
+            }
+         
         }
 
         public void ShotsSearch()
         {
-            UI.AskAnimalID();
-            healthAnimal.searchID = Int32.Parse(Console.ReadLine());
+            try
+            {
+                UI.AskAnimalID();
+                healthAnimal.searchID = Int32.Parse(Console.ReadLine());
 
-            DataClasses1DataContext db = new DataClasses1DataContext();
+                DataClasses1DataContext db = new DataClasses1DataContext();
 
-            var Shot = db.GetTable<Shot>();
-            var ShotList = from i in Shot
-                           where i.AnimalID == healthAnimal.searchID
-                           select i.Shots;
-            Console.Write(ShotList);
+                var Shot = db.GetTable<Shot>();
+                var ShotList = from i in Shot
+                               where i.AnimalID == healthAnimal.searchID
+                               select i.Shots;
+                Console.Write(ShotList);
+            }
+            catch
+            {
+                UI.NeedValidID();
+                ShotsSearch();
+            }
+           
 
         }
     }

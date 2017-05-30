@@ -50,9 +50,35 @@ namespace HumaneSociety
             AddFood();
             AddHealth();
             AddAnimalToRoom();
-            
-            Console.WriteLine("\nPress any key to return to Main Menu.");
+
+            Console.Write("Now let's set some personality traits for the animal. These will be determined through a series of true / false questions.");
+            AddTraits();
+
+            DataClasses1DataContext datab = new DataClasses1DataContext();
+            Trait addedTraits = new Trait();
+            addedTraits.AnimalID = Animal.AnimalID;
+            addedTraits.Energetic = newAnimalInfo.energetic;
+            addedTraits.Cuddly = newAnimalInfo.cuddly;
+            addedTraits.SpayedNuetered = newAnimalInfo.spayedNeutered;
+            addedTraits.Young = newAnimalInfo.young;
+
+            datab.Traits.InsertOnSubmit(addedTraits);
+
+            datab.SubmitChanges();
+            Console.WriteLine("\n Animal added. Press any key to return to Main Menu.\n");
             Console.ReadKey(); 
+        }
+
+        public void AddTraits()
+        {
+            Console.Write("Is the animal energetic? true / false\n");
+            newAnimalInfo.energetic = Convert.ToBoolean(Console.ReadLine());
+            Console.Write("Is the animal cuddly? true / false?\n");
+            newAnimalInfo.cuddly = Convert.ToBoolean(Console.ReadLine());
+            Console.Write("Is the animal spayed or nuetered? true / false\n");
+            newAnimalInfo.spayedNeutered = Convert.ToBoolean(Console.ReadLine());
+            Console.Write("Is the animal young? true / false\n");
+            newAnimalInfo.young = Convert.ToBoolean(Console.ReadLine());
         }
         public void AddHealth()
         {
@@ -89,43 +115,19 @@ namespace HumaneSociety
             {
                 case "1":
                     search.getAnimalIDByName();
-                    CheckOpenRoom();
+                    search.CheckOpenRoom();
                     AddAnimalToRoom();
                     break;
                 case "2":
-                    CheckOpenRoom();
+                    search.CheckOpenRoom();
                     AddAnimalToRoom();
                     break;
             }
         }
-
-        public bool CheckOpenRoom()
-        {
-            UI.AskRoomNumber();
-            int wantedRoomNumber = Int32.Parse(Console.ReadLine());
-            DataClasses1DataContext db = new DataClasses1DataContext();
-            var rooms = db.GetTable<RoomNumber>();
-            var isFull = from o in rooms
-                         where o.Room == wantedRoomNumber
-                         select o.Occupied;
-            if (isFull.First() == false)
-            {
-                room.room = wantedRoomNumber;
-                room.occupied = true;
-                return false;
-            }
-            else
-            {
-                UI.RoomOccupied();
-                CheckOpenRoom();
-                return true;
-            }
-        }
-
+        
         public void AddAnimalToRoom()
         {
-            CheckOpenRoom();
-            if (CheckOpenRoom() == false)
+            if (search.CheckOpenRoom() == false)
             {
                 UI.AskAnimalID();
                 room.animalID = Int32.Parse(Console.ReadLine());

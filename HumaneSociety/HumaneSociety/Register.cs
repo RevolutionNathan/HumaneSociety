@@ -8,9 +8,10 @@ namespace HumaneSociety
 {
     class Register
     {
+        public int cashDrawer;
         public void RunRegister()
         {
-
+            Console.Write("Free animals for everyone until the developer gets his work done");
         }
     }
 }

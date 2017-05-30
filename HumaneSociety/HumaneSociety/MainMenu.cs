@@ -15,7 +15,6 @@ namespace HumaneSociety
         Health health = new HumaneSociety.Health();
         Search search = new Search();
         Adoption adoption = new Adoption();
-        Room room = new Room();
         private bool runMenu = false;
         public void Menu()
         {
@@ -36,7 +35,7 @@ namespace HumaneSociety
                         register.RunRegister();
                         break;
                     case "4":
-                        add.CheckOpenRoom();
+                        search.CheckOpenRoom();
                         break;
                     case "5":
                         health.HealthRecords();
@@ -48,6 +47,9 @@ namespace HumaneSociety
                         adoption.AdoptionApplication();
                         break;
                     case "8":
+                        adoption.AdoptAnimal();
+                        break;
+                    case "9":
                         runMenu = true;
                         break;
                     default:

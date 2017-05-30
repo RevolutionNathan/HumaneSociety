@@ -10,7 +10,7 @@ namespace HumaneSociety
     {
         public static void MainMenuChoice()
         {
-            Console.Write("Main Menu:\n 1: Add Animal\n 2: Delete Animal\n 3 Register\n 4 Rooming \n 5 Health Records\n 6 Search Animal\n 7 Adoption Application \n 8 Quit\n");
+            Console.Write("Main Menu:\n 1: Add Animal\n 2: Delete Animal\n 3 Register\n 4 Rooming \n 5 Health Records\n 6 Search Animal\n 7 Adoption Application \n 8 Adopt Animal \n 9 Quit\n");
         }
 
         public static void AddMenuChoice()
@@ -123,7 +123,14 @@ namespace HumaneSociety
         {
             Console.Write("Enter the quantity of food the animal eats \n");
         }
-
+        public static void RoomOPen()
+        {
+            Console.Write("That room is currently unoccupied");
+        }
+        public static void NeedValidID()
+        {
+            Console.Write("Please enter a valid Animal ID\n");
+        }
         public static void AskShotsStatus()
         {
             Console.Write("Does the animal have it's shots? (enter true / false) \n");
